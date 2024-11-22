@@ -1,6 +1,6 @@
 name: Dockerfiles
 # Test and push dockerfiles when they change.
-# Test for pull request, push dockerfiles when merged into main.
+# Test for pull request, push dockerfiles when merged into master.
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
@@ -102,7 +102,7 @@ jobs:
         uses: docker/build-push-action@v6
         if: ${{ steps.filter.outputs.docker == 'true' || github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' }}
         with:
-          push: ${{ github.ref == 'refs/heads/main' }}
+          push: ${{ github.ref == 'refs/heads/master' }}
           file: src/${{ matrix.tag }}.Dockerfile
           target: ${{ matrix.target }}
           platforms: ${{ matrix.platforms }}
